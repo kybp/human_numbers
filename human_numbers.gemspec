@@ -1,6 +1,10 @@
+lib = File.join(Dir.getwd, 'lib')
+$:.unshift lib unless $:.include? lib
+require 'human_numbers/version'
+
 Gem::Specification.new do |s|
   s.name        = 'human_numbers'
-  s.version     = '0.0.1'
+  s.version     = HumanNumbers::VERSION
   s.date        = '2016-09-01'
   s.authors     = ["Kyle Brown"]
   s.email       = 'picokyle@gmail.com'
