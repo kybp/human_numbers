@@ -197,4 +197,13 @@ class EnglishNumberTest < MiniTest::Test
     assert_equal('one point twenty-second', 1.22.to_english(:ordinal))
   end
 
+  def test_zero_point_zero
+    assert_equal('zero point zero', 0.0.to_english)
+  end
+
+  def test_leading_zeroes_in_decimal_part_of_ordinal_float
+    assert_equal('one point zero zero one hundred and first',
+                 1.00101.to_english(:ordinal))
+  end
+
 end

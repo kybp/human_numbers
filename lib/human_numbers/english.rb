@@ -115,7 +115,11 @@ end
 
 class Float
   def to_english(style = :cardinal)
-    "#{self.to_i.to_english(:cardinal)} point " +
-      "#{self.to_s.sub(/.*\./, '').to_i.to_english(style)}"
+    whole_part   = self.to_i.to_english(:cardinal)
+    decimal_part = self.to_s.sub(/.*\./, '')
+    non_zero     = decimal_part.index(/[^0]/) || 0
+    zeroes       = (decimal_part[0...non_zero]).gsub('0', 'zero ')
+    after_zeroes = decimal_part[non_zero..-1].to_i.to_english(style)
+    "#{whole_part} point " + "#{zeroes}#{after_zeroes}"
   end
 end
