@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency  'simplecov', '~> 0.12.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.1.11', '>= 1.1.11'
   s.description = <<-EOF
-human_numbers defines the method Integer#to_english for converting numbers
-to English strings. By default, a cardinal number will be returned (one, two,
-three), but supplying an :ordinal argument will return an ordinal (first,
-second, third). Handles numbers with absolute value less than
+human_numbers defines the methods Float#to_english and Integer#to_english for
+converting numbers to English strings. By default, a cardinal number will be
+returned (one, two, three), but supplying an :ordinal argument will return an
+ordinal (first, second, third). Handles numbers with absolute value less than
 1000000000000000000000000000000000.
   EOF
 end

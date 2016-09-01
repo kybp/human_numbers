@@ -112,3 +112,10 @@ class Integer
     end
   end
 end
+
+class Float
+  def to_english(style = :cardinal)
+    "#{self.to_i.to_english(:cardinal)} point " +
+      "#{self.to_s.sub(/.*\./, '').to_i.to_english(style)}"
+  end
+end

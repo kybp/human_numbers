@@ -189,4 +189,12 @@ class EnglishNumberTest < MiniTest::Test
     assert_equal('twelfth', 12.to_english(:ordinal))
   end
 
+  def test_float_cardinal
+    assert_equal('one point twenty-two', 1.22.to_english)
+  end
+
+  def test_float_ordinal
+    assert_equal('one point twenty-second', 1.22.to_english(:ordinal))
+  end
+
 end
