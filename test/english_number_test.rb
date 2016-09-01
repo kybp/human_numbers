@@ -7,7 +7,7 @@ class EnglishNumberTest < MiniTest::Test
   end
 
   def test_upper_limit
-    assert_equal("nine nonillion nine hundred ninety-nine octillion nine hundred ninety-nine septillion nine hundred ninety-nine sextillion nine hundred ninety-nine quintillion nine hundred ninety-nine quadrillion nine hundred ninety-nine trillion nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine",
+    assert_equal("nine nonillion nine hundred ninety-nine octillion nine hundred ninety-nine septillion nine hundred ninety-nine sextillion nine hundred ninety-nine quintillion nine hundred ninety-nine quadrillion nine hundred ninety-nine trillion nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred and ninety-nine",
                  9999999999999999999999999999999.to_english(:cardinal))
   end
 
@@ -154,7 +154,7 @@ class EnglishNumberTest < MiniTest::Test
   end
 
   def test_non_hyphenated_composite_ordinal
-    assert_equal('one hundred first', 101.to_english(:ordinal))
+    assert_equal('one hundred and first', 101.to_english(:ordinal))
   end
 
   def test_1_ordinal

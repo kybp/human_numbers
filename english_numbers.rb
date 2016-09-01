@@ -1,11 +1,16 @@
 class Integer
   def to_english(style = :cardinal)
-    (self < 0 ? 'negative ' : '') +
+    string = (self < 0 ? 'negative ' : '') +
       case style
       when :ordinal;  ordinal_number(self.abs)
       when :cardinal; cardinal_number(self.abs)
       else raise ArgumentError, 'unrecognized number style: #{style}'
       end
+    if self > 100 and self % 100 != 0
+      string.gsub(/(.*) /, '\1 and ')
+    else
+      string
+    end
   end
 end
 
