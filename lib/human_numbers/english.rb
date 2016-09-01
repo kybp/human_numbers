@@ -6,7 +6,7 @@ module HumanNumbers::English
   def self.cardinal_number(n, prefix='')
     return prefix.empty? ? 'zero' : '' if n.zero?
     if n >= 1_000_000_000_000_000_000_000_000_000_000_000
-      raise ArgumentError, 'number too large to print in English: #{n}'
+      raise ArgumentError, "number too large to print in English: #{n}"
     end
 
     prefix + if n >= 1_000_000_000_000_000_000_000_000_000_000
@@ -103,7 +103,7 @@ class Integer
       case style
       when :ordinal;  HumanNumbers::English::ordinal_number(self.abs)
       when :cardinal; HumanNumbers::English::cardinal_number(self.abs)
-      else raise ArgumentError, 'unrecognized number style: #{style}'
+      else raise ArgumentError, "unrecognized number style: #{style}"
       end
     if self > 100 and self % 100 != 0
       string.gsub(/(.*) /, '\1 and ')
