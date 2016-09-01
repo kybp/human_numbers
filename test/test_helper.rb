@@ -7,7 +7,7 @@ SimpleCov.start do
   command_name 'MiniTest'
 end
 
-require_relative '../english_numbers'
+require 'human_numbers'
 
 class BrightReporter < MiniTest::Reporters::DefaultReporter
   def initialize
