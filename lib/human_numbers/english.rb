@@ -5,11 +5,12 @@ module HumanNumbers::English
 
   def self.cardinal_number(n, prefix='')
     return prefix.empty? ? 'zero' : '' if n.zero?
-    if n >= 1_000_000_000_000_000_000_000_000_000_000_000
+    if n >= HumanNumbers::UPPER_BOUND
       raise ArgumentError, "number too large to print in English: #{n}"
     end
 
-    prefix + if n >= 1_000_000_000_000_000_000_000_000_000_000
+    prefix +
+    if n >= 1_000_000_000_000_000_000_000_000_000_000
       cardinal_factor(n, 'nonillion', 1_000_000_000_000_000_000_000_000_000_000)
     elsif n >= 1_000_000_000_000_000_000_000_000_000
       cardinal_factor(n, 'octillion',   1_000_000_000_000_000_000_000_000_000)
@@ -40,35 +41,36 @@ module HumanNumbers::English
 
   def self.simple_cardinal(n, prefix='')
     return '' if n.zero?
-    prefix + case n
-             when  1; 'one'
-             when  2; 'two'
-             when  3; 'three'
-             when  4; 'four'
-             when  5; 'five'
-             when  6; 'six'
-             when  7; 'seven'
-             when  8; 'eight'
-             when  9; 'nine'
-             when 10; 'ten'
-             when 11; 'eleven'
-             when 12; 'twelve'
-             when 13; 'thirteen'
-             when 14; 'fourteen'
-             when 15; 'fifteen'
-             when 16; 'sixteen'
-             when 17; 'seventeen'
-             when 18; 'eighteen'
-             when 19; 'nineteen'
-             when 20; 'twenty'
-             when 30; 'thirty'
-             when 40; 'forty'
-             when 50; 'fifty'
-             when 60; 'sixty'
-             when 70; 'seventy'
-             when 80; 'eighty'
-             when 90; 'ninety'
-             end
+    prefix +
+    case n
+    when  1; 'one'
+    when  2; 'two'
+    when  3; 'three'
+    when  4; 'four'
+    when  5; 'five'
+    when  6; 'six'
+    when  7; 'seven'
+    when  8; 'eight'
+    when  9; 'nine'
+    when 10; 'ten'
+    when 11; 'eleven'
+    when 12; 'twelve'
+    when 13; 'thirteen'
+    when 14; 'fourteen'
+    when 15; 'fifteen'
+    when 16; 'sixteen'
+    when 17; 'seventeen'
+    when 18; 'eighteen'
+    when 19; 'nineteen'
+    when 20; 'twenty'
+    when 30; 'thirty'
+    when 40; 'forty'
+    when 50; 'fifty'
+    when 60; 'sixty'
+    when 70; 'seventy'
+    when 80; 'eighty'
+    when 90; 'ninety'
+    end
   end
 
   def self.ordinal_number(n)

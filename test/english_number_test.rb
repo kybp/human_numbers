@@ -2,27 +2,29 @@ require 'test_helper'
 
 class EnglishNumberTest < MiniTest::Test
 
-  def test_bad_style
+  def test_bad_style_raises_argument_error
     assert_raises(ArgumentError) { 1.to_english(:english) }
   end
 
   def test_upper_limit
-    assert_equal("nine nonillion nine hundred ninety-nine octillion nine hundred ninety-nine septillion nine hundred ninety-nine sextillion nine hundred ninety-nine quintillion nine hundred ninety-nine quadrillion nine hundred ninety-nine trillion nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred and ninety-nine",
-                 9999999999999999999999999999999.to_english(:cardinal))
+    n = 999999999999999999999999999999999
+    assert_equal(HumanNumbers::UPPER_BOUND - 1, n)
+    assert_equal("nine hundred ninety-nine nonillion nine hundred ninety-nine octillion nine hundred ninety-nine septillion nine hundred ninety-nine sextillion nine hundred ninety-nine quintillion nine hundred ninety-nine quadrillion nine hundred ninety-nine trillion nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred and ninety-nine",
+                 n.to_english(:cardinal))
   end
 
   def test_over_upper_limit
     assert_raises(ArgumentError) do
-      1000000000000000000000000000000000.to_english(:cardinal)
+      HumanNumbers::UPPER_BOUND.to_english(:cardinal)
     end
   end
 
-  def test_adds_negative
+  def test_adds_negative_to_negative_number
     assert_equal('negative one', -1.to_english(:cardinal))
   end
 
   def test_defaults_to_cardinal
-    assert_equal('one', 1.to_english)
+    assert_equal(1.to_english(:cardinal), 1.to_english)
   end
 
   def test_0_cardinal
