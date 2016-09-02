@@ -2,23 +2,47 @@
 
 module HumanNumbers::French
   def self.cardinal_factor(n, name, factor, gender)
+    factored = n / factor
     mod = n % factor
-    cardinal_number(n / factor) + "-#{name}" +
-      cardinal_number(mod, gender, mod == 1 ? '-et-' : '-')
+    name += 's' if factor > 1000 and factored > 1
+    cardinal_number(factored) + "-#{name}" + cardinal_number(mod, gender, '-')
   end
 
   def self.cardinal_number(n, gender=:masculine, prefix='')
     return prefix.empty? ? 'zéro' : '' if n.zero?
+    if n >= HumanNumbers::UPPER_BOUND
+      raise ArgumentError, "number too large to print in French: #{n}"
+    end
 
     prefix +
-    if n >= 1000
-      raise ArgumentError, "number too large to print in French: #{n}"
+    if    n >= 10 ** 30
+      cardinal_factor(n, 'quintillion',  10 ** 30, gender)
+    elsif n >= 10 ** 27
+      cardinal_factor(n, 'quadrilliard', 10 ** 27, gender)
+    elsif n >= 10 ** 24
+      cardinal_factor(n, 'quadrillion',  10 ** 24, gender)
+    elsif n >= 10 ** 21
+      cardinal_factor(n, 'trilliard',    10 ** 21, gender)
+    elsif n >= 10 ** 18
+      cardinal_factor(n, 'trillion',     10 ** 18, gender)
+    elsif n >= 10 ** 15
+      cardinal_factor(n, 'billiard',     10 ** 15, gender)
+    elsif n >= 10 ** 12
+      cardinal_factor(n, 'billion',      10 ** 12, gender)
+    elsif n >= 10 ** 9
+      cardinal_factor(n, 'milliard',     10 ** 9, gender)
+    elsif n >= 10 ** 6
+      cardinal_factor(n, 'million',      10 ** 6, gender)
+    elsif n >= 2000
+      cardinal_factor(n, 'mille',        10 ** 3, gender)
+    elsif n >= 1000
+      'mille' + simple_cardinal(n % 1000, gender, '-')
     elsif n > 100 and n % 100 == 0
       cardinal_number(n / 100) + '-cents'
-    elsif n == 100
-      'cent'
-    elsif n >= 100
+    elsif n >= 200
       cardinal_factor(n, 'cent', 100, gender)
+    elsif n >= 100
+      'cent' + simple_cardinal(n % 100, gender, '-')
     elsif n > 80
       'quatre-vingt' + simple_cardinal(n - 80, gender, '-')
     elsif n == 80
@@ -84,10 +108,11 @@ class Integer
       raise ArgumentError, "unrecognized gender: #{gender}"
     end
 
-    case style
-    when :ordinal;  HumanNumbers::French::ordinal_number(self.abs,  gender)
-    when :cardinal; HumanNumbers::French::cardinal_number(self.abs, gender)
-    else raise ArgumentError, "unrecognized number style: #{style}"
-    end
+    (self < 0 ? 'moins ' : '') +
+      case style
+      when :ordinal;  HumanNumbers::French::ordinal_number(self.abs,  gender)
+      when :cardinal; HumanNumbers::French::cardinal_number(self.abs, gender)
+      else raise ArgumentError, "unrecognized number style: #{style}"
+      end
   end
 end

@@ -11,6 +11,19 @@ class FrenchNumberTest < MiniTest::Test
     assert_raises(ArgumentError) { 1.to_french(:cardinal, :french) }
   end
 
+  def test_upper_limit
+    n = 10 ** 33 - 1
+    assert_equal(HumanNumbers::UPPER_BOUND - 1, n)
+    assert_equal("neuf-cent-quatre-vingt-dix-neuf-quintillions-neuf-cent-quatre-vingt-dix-neuf-quadrilliards-neuf-cent-quatre-vingt-dix-neuf-quadrillions-neuf-cent-quatre-vingt-dix-neuf-trilliards-neuf-cent-quatre-vingt-dix-neuf-trillions-neuf-cent-quatre-vingt-dix-neuf-billiards-neuf-cent-quatre-vingt-dix-neuf-billions-neuf-cent-quatre-vingt-dix-neuf-milliards-neuf-cent-quatre-vingt-dix-neuf-millions-neuf-cent-quatre-vingt-dix-neuf-mille-neuf-cent-quatre-vingt-dix-neuf",
+                 n.to_french(:cardinal))
+  end
+
+  def test_over_upper_limit
+    assert_raises(ArgumentError) do
+      HumanNumbers::UPPER_BOUND.to_french(:cardinal)
+    end
+  end
+
   def test_style_defaults_to_cardinal
     assert_equal(1.to_french(:cardinal), 1.to_french)
   end
@@ -29,6 +42,10 @@ class FrenchNumberTest < MiniTest::Test
 
   def test_1_feminine_cardinal
     assert_equal('une', 1.to_french(:cardinal, :feminine))
+  end
+
+  def test_adds_moins_to_negative_number
+    assert_equal('moins deux', -2.to_french(:cardinal))
   end
 
   def test_2_cardinal
@@ -167,16 +184,48 @@ class FrenchNumberTest < MiniTest::Test
     assert_equal('cent', 100.to_french(:cardinal))
   end
 
+  def test_101_masculine_cardinal
+    assert_equal('cent-un', 101.to_french(:cardinal, :masculine))
+  end
+
+  def test_101_feminine_cardinal
+    assert_equal('cent-une', 101.to_french(:cardinal, :feminine))
+  end
+
   def test_200_cardinal
     assert_equal('deux-cents', 200.to_french(:cardinal))
   end
 
-  def test_201_masculine_cardinal
-    assert_equal('deux-cent-et-un', 201.to_french(:cardinal, :masculine))
+  def test_201_cardinal
+    assert_equal('deux-cent-un', 201.to_french(:cardinal))
   end
 
-  def test_201_feminine_cardinal
-    assert_equal('deux-cent-et-une', 201.to_french(:cardinal, :feminine))
+  def test_1000_cardinal
+    assert_equal('mille', 1000.to_french(:cardinal))
+  end
+
+  def test_1001_cardinal
+    assert_equal('mille-un', 1001.to_french(:cardinal))
+  end
+
+  def test_2000_cardinal
+    assert_equal('deux-mille', 2000.to_french(:cardinal))
+  end
+
+  def test_2001_cardinal
+    assert_equal('deux-mille-un', 2001.to_french(:cardinal))
+  end
+
+  def test_1_000_000_cardinal
+    assert_equal('un-million', 1000000.to_french(:cardinal))
+  end
+
+  def test_1_000_001_cardinal
+    assert_equal('un-million-un', 1000001.to_french(:cardinal))
+  end
+
+  def test_2_000_001_cardinal
+    assert_equal('deux-millions-un', 2000001.to_french(:cardinal))
   end
 
   def test_ordinal_add_ième

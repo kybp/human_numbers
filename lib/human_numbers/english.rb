@@ -10,28 +10,28 @@ module HumanNumbers::English
     end
 
     prefix +
-    if n >= 1_000_000_000_000_000_000_000_000_000_000
-      cardinal_factor(n, 'nonillion', 1_000_000_000_000_000_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000_000_000_000_000_000
-      cardinal_factor(n, 'octillion',   1_000_000_000_000_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000_000_000_000_000
-      cardinal_factor(n, 'septillion',  1_000_000_000_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000_000_000_000
-      cardinal_factor(n, 'sextillion',  1_000_000_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000_000_000
-      cardinal_factor(n, 'quintillion', 1_000_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000_000
-      cardinal_factor(n, 'quadrillion', 1_000_000_000_000_000)
-    elsif n >= 1_000_000_000_000
-      cardinal_factor(n, 'trillion',    1_000_000_000_000)
-    elsif n >= 1_000_000_000
-      cardinal_factor(n, 'billion',     1_000_000_000)
-    elsif n >= 1_000_000
-      cardinal_factor(n, 'million',     1_000_000)
-    elsif n >= 1000
-      cardinal_factor(n, 'thousand',    1000)
-    elsif n >= 100
-      cardinal_factor(n, 'hundred',     100)
+    if    n >= 10 ** 30
+      cardinal_factor(n, 'nonillion',   10 ** 30)
+    elsif n >= 10 ** 27
+      cardinal_factor(n, 'octillion',   10 ** 27)
+    elsif n >= 10 ** 24
+      cardinal_factor(n, 'septillion',  10 ** 24)
+    elsif n >= 10 ** 21
+      cardinal_factor(n, 'sextillion',  10 ** 21)
+    elsif n >= 10 ** 18
+      cardinal_factor(n, 'quintillion', 10 ** 18)
+    elsif n >= 10 ** 15
+      cardinal_factor(n, 'quadrillion', 10 ** 15)
+    elsif n >= 10 ** 12
+      cardinal_factor(n, 'trillion',    10 ** 12)
+    elsif n >= 10 ** 9
+      cardinal_factor(n, 'billion',     10 ** 9)
+    elsif n >= 10 ** 6
+      cardinal_factor(n, 'million',     10 ** 6)
+    elsif n >= 10 ** 3
+      cardinal_factor(n, 'thousand',    10 ** 3)
+    elsif n >= 10 ** 2
+      cardinal_factor(n, 'hundred',     10 ** 2)
     elsif n >= 20
       simple_cardinal(n / 10 * 10) + simple_cardinal(n % 10, '-')
     else

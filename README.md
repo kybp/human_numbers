@@ -1,10 +1,10 @@
 # human_numbers
 
-human_numbers adds the methods #to_english and #to_french to the Float
-and Integer classes, for converting numbers to natural language
-strings. It can convert numbers either to cardinals (one, two, three)
-or ordinals (first, second, third). It works with numbers whose
-absolute value is less than 1000000000000000000000000000000000.
+human_numbers adds the method #to_english to the Float and Integer
+classes, as well as the method #to_french to the Integer class, for
+converting numbers to natural language strings. It can convert numbers
+either to cardinals (one, two, three) or ordinals (first, second,
+third). It works with numbers whose absolute value is less than 10^33.
 
 ## Installation
 

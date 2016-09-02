@@ -1,5 +1,5 @@
 module HumanNumbers
-  UPPER_BOUND = 1_000_000_000_000_000_000_000_000_000_000_000
+  UPPER_BOUND = 10 ** 33
 end
 
 require 'human_numbers/english'

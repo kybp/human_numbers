@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.12.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.1.11', '>= 1.1.11'
   s.description = <<-EOF
-human_numbers defines the methods #to_english and #to_french on the
-classes Float and Integer for converting numbers to natural language
-strings. By default, a cardinal number will be returned (one, two,
-three), but supplying an :ordinal argument will cause it to return an
-ordinal (first, second, third). It works with numbers whose absolute
-value is less than 1000000000000000000000000000000000. #to_french
+human_numbers defines the method #to_english on the classes Float and
+Integer, as well as the method #to_french on the Integer class, for
+converting numbers to natural language strings. By default, a cardinal
+number will be returned (one, two, three), but supplying an :ordinal
+argument will cause it to return an ordinal (first, second, third). It
+works with numbers whose absolute value is less than 10^33. #to_french
 supports a second argument for specifying the gender of the word,
 which can be either :masculine or :feminine.
   EOF
